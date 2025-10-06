@@ -29,7 +29,7 @@ const AdminLayout = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex">
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
         <div 
@@ -39,10 +39,10 @@ const AdminLayout = () => {
       )}
 
       {/* Sidebar */}
-      <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 ${
+      <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 flex flex-col ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}>
-        <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200">
+        <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200 flex-shrink-0">
           <h1 className="text-xl font-bold text-gray-800">Bệnh viện</h1>
           <button
             onClick={() => setSidebarOpen(false)}
@@ -52,7 +52,7 @@ const AdminLayout = () => {
           </button>
         </div>
         
-        <div className="px-4 py-6">
+        <div className="px-4 py-6 flex-1 overflow-y-auto">
           <div className="mb-6">
             <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">
               Quản trị hệ thống
@@ -84,9 +84,9 @@ const AdminLayout = () => {
       </div>
 
       {/* Main content */}
-      <div className="lg:pl-64">
+      <div className="flex-1 flex flex-col min-w-0 lg:ml-0">
         {/* Top bar */}
-        <div className="bg-white shadow-sm border-b border-gray-200">
+        <div className="bg-white shadow-sm border-b border-gray-200 flex-shrink-0">
           <div className="flex items-center justify-between h-16 px-6">
             <button
               onClick={() => setSidebarOpen(true)}
@@ -101,7 +101,7 @@ const AdminLayout = () => {
         </div>
 
         {/* Page content */}
-        <main className="p-6">
+        <main className="flex-1 p-6 overflow-y-auto">
           <Outlet />
         </main>
       </div>
