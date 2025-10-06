@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { 
   LayoutDashboard, 
@@ -14,16 +14,18 @@ import {
 
 const AdminLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const menuItems = [
-    { icon: LayoutDashboard, label: "Dashboard", path: "/admin" },
-    { icon: Stethoscope, label: "Bác sĩ", path: "/admin/doctors" },
-    { icon: Users, label: "Chuyên khoa", path: "/admin/specialties" },
-    { icon: UserCheck, label: "Bệnh nhân", path: "/admin/patients" },
-    { icon: Calendar, label: "Lịch khám", path: "/admin/appointments" },
-    { icon: Clock, label: "Lịch làm việc", path: "/admin/work-schedules" },
-    { icon: Settings, label: "Lịch đặc biệt", path: "/admin/special-schedules" },
-    { icon: Users, label: "Người dùng", path: "/admin/users" },
+    { icon: LayoutDashboard, label: "Dashboard", path: "" },
+    { icon: Stethoscope, label: "Bác sĩ", path: "doctors" },
+    { icon: Users, label: "Chuyên khoa", path: "specialties" },
+    { icon: UserCheck, label: "Bệnh nhân", path: "patients" },
+    { icon: Calendar, label: "Lịch khám", path: "appointments" },
+    { icon: Clock, label: "Lịch làm việc", path: "work-schedules" },
+    { icon: Settings, label: "Lịch đặc biệt", path: "special-schedules" },
+    { icon: Users, label: "Người dùng", path: "users" },
   ];
 
   return (
@@ -59,16 +61,24 @@ const AdminLayout = () => {
           </div>
           
           <nav className="space-y-2">
-            {menuItems.map((item, index) => (
-              <a
-                key={index}
-                href={item.path}
-                className="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-100 hover:text-gray-900 transition-colors"
-              >
-                <item.icon className="w-5 h-5 mr-3" />
-                {item.label}
-              </a>
-            ))}
+            {menuItems.map((item, index) => {
+              const isActive = location.pathname === `/admin/${item.path}` || 
+                              (item.path === "" && location.pathname === "/admin");
+              return (
+                <button
+                  key={index}
+                  onClick={() => navigate(item.path)}
+                  className={`w-full flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                    isActive 
+                      ? "bg-blue-100 text-blue-900" 
+                      : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                  }`}
+                >
+                  <item.icon className="w-5 h-5 mr-3" />
+                  {item.label}
+                </button>
+              );
+            })}
           </nav>
         </div>
       </div>

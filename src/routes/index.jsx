@@ -91,31 +91,31 @@ export const router = createBrowserRouter([
         element: <DashboardPage />,
       },
       {
-        path: ROUTE.ADMIN_DOCTORS,
+        path: "doctors",
         element: <DoctorsPage />,
       },
       {
-        path: ROUTE.ADMIN_SPECIALTIES,
+        path: "specialties",
         element: <SpecialtiesPage />,
       },
       {
-        path: ROUTE.ADMIN_PATIENTS,
+        path: "patients",
         element: <PatientsPage />,
       },
       {
-        path: ROUTE.ADMIN_APPOINTMENTS,
+        path: "appointments",
         element: <AppointmentsPage />,
       },
       {
-        path: ROUTE.ADMIN_WORK_SCHEDULES,
+        path: "work-schedules",
         element: <WorkSchedulesPage />,
       },
       {
-        path: ROUTE.ADMIN_SPECIAL_SCHEDULES,
+        path: "special-schedules",
         element: <SpecialSchedulePage />,
       },
       {
-        path: ROUTE.ADMIN_USERS,
+        path: "users",
         element: <UsersPage />,
       },
     ],
