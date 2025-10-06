@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Plus, Edit, Trash2, Eye, Key } from "lucide-react";
+import UserModal from "./components/UserModal";
 
 const UsersPage = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingUser, setEditingUser] = useState(null);
   const [users, setUsers] = useState([
     {
       id: "USR001",
@@ -52,11 +55,13 @@ const UsersPage = () => {
   ]);
 
   const handleAddUser = () => {
-    console.log("Thêm người dùng mới");
+    setEditingUser(null);
+    setIsModalOpen(true);
   };
 
   const handleEditUser = (user) => {
-    console.log("Sửa người dùng:", user);
+    setEditingUser(user);
+    setIsModalOpen(true);
   };
 
   const handleDeleteUser = (userId) => {
@@ -71,6 +76,25 @@ const UsersPage = () => {
 
   const handleResetPassword = (user) => {
     console.log("Reset mật khẩu cho:", user);
+  };
+
+  const handleSaveUser = (userData) => {
+    if (editingUser) {
+      // Cập nhật người dùng
+      setUsers(users.map(user => 
+        user.id === editingUser.id ? { ...user, ...userData } : user
+      ));
+    } else {
+      // Thêm người dùng mới
+      const newUser = {
+        id: `USR${String(users.length + 1).padStart(3, '0')}`,
+        lastLogin: "Chưa đăng nhập",
+        ...userData
+      };
+      setUsers([...users, newUser]);
+    }
+    setIsModalOpen(false);
+    setEditingUser(null);
   };
 
   const getStatusBadge = (status) => {
@@ -208,6 +232,17 @@ const UsersPage = () => {
           </table>
         </div>
       </div>
+
+      {/* Modal */}
+      <UserModal
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+          setEditingUser(null);
+        }}
+        onSave={handleSaveUser}
+        editingUser={editingUser}
+      />
     </div>
   );
 };

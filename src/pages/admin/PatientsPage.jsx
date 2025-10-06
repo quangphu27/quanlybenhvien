@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Plus, Edit, Trash2, Eye } from "lucide-react";
+import PatientModal from "./components/PatientModal";
 
 const PatientsPage = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingPatient, setEditingPatient] = useState(null);
   const [patients, setPatients] = useState([
     {
       id: "PAT001",
@@ -62,11 +65,13 @@ const PatientsPage = () => {
   ]);
 
   const handleAddPatient = () => {
-    console.log("Thêm bệnh nhân mới");
+    setEditingPatient(null);
+    setIsModalOpen(true);
   };
 
   const handleEditPatient = (patient) => {
-    console.log("Sửa bệnh nhân:", patient);
+    setEditingPatient(patient);
+    setIsModalOpen(true);
   };
 
   const handleDeletePatient = (patientId) => {
@@ -77,6 +82,25 @@ const PatientsPage = () => {
 
   const handleViewPatient = (patient) => {
     console.log("Xem chi tiết bệnh nhân:", patient);
+  };
+
+  const handleSavePatient = (patientData) => {
+    if (editingPatient) {
+      // Cập nhật bệnh nhân
+      setPatients(patients.map(patient => 
+        patient.id === editingPatient.id ? { ...patient, ...patientData } : patient
+      ));
+    } else {
+      // Thêm bệnh nhân mới
+      const newPatient = {
+        id: `PAT${String(patients.length + 1).padStart(3, '0')}`,
+        registrationDate: new Date().toISOString().split('T')[0],
+        ...patientData
+      };
+      setPatients([...patients, newPatient]);
+    }
+    setIsModalOpen(false);
+    setEditingPatient(null);
   };
 
   const getStatusBadge = (status) => {
@@ -196,6 +220,17 @@ const PatientsPage = () => {
           </table>
         </div>
       </div>
+
+      {/* Modal */}
+      <PatientModal
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+          setEditingPatient(null);
+        }}
+        onSave={handleSavePatient}
+        editingPatient={editingPatient}
+      />
     </div>
   );
 };

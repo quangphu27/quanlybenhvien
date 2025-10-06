@@ -121,10 +121,23 @@ const DashboardPage = () => {
           <h3 className="text-lg font-semibold text-gray-900 mb-4">
             Lịch khám 7 ngày gần nhất
           </h3>
-          <div className="h-64 flex items-center justify-center text-gray-500">
-            <div className="text-center">
-              <TrendingUp className="w-12 h-12 mx-auto mb-2 text-gray-400" />
-              <p>Biểu đồ sẽ được hiển thị ở đây</p>
+          <div className="h-64">
+            <div className="flex items-end justify-between h-full space-x-2">
+              {[
+                { day: "T2", count: 12, height: "h-16" },
+                { day: "T3", count: 18, height: "h-20" },
+                { day: "T4", count: 15, height: "h-18" },
+                { day: "T5", count: 22, height: "h-24" },
+                { day: "T6", count: 19, height: "h-20" },
+                { day: "T7", count: 8, height: "h-12" },
+                { day: "CN", count: 5, height: "h-8" }
+              ].map((item, index) => (
+                <div key={index} className="flex flex-col items-center flex-1">
+                  <div className={`w-full bg-blue-500 rounded-t ${item.height} mb-2`}></div>
+                  <span className="text-xs text-gray-600">{item.day}</span>
+                  <span className="text-xs font-medium text-gray-900">{item.count}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -134,10 +147,51 @@ const DashboardPage = () => {
           <h3 className="text-lg font-semibold text-gray-900 mb-4">
             Trạng thái lịch khám
           </h3>
-          <div className="h-64 flex items-center justify-center text-gray-500">
-            <div className="text-center">
-              <Clock className="w-12 h-12 mx-auto mb-2 text-gray-400" />
-              <p>Biểu đồ trạng thái sẽ được hiển thị ở đây</p>
+          <div className="h-64">
+            <div className="flex items-center justify-center h-full">
+              <div className="relative w-48 h-48">
+                {/* Pie chart simulation */}
+                <div className="absolute inset-0 rounded-full border-8 border-blue-500"></div>
+                <div className="absolute inset-0 rounded-full border-8 border-green-500 transform rotate-90"></div>
+                <div className="absolute inset-0 rounded-full border-8 border-yellow-500 transform rotate-180"></div>
+                <div className="absolute inset-0 rounded-full border-8 border-red-500 transform rotate-270"></div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-gray-900">156</div>
+                    <div className="text-sm text-gray-600">Tổng lịch</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="mt-4 space-y-2">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <div className="w-3 h-3 bg-blue-500 rounded-full mr-2"></div>
+                  <span className="text-sm text-gray-600">Confirmed</span>
+                </div>
+                <span className="text-sm font-medium">65%</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <div className="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
+                  <span className="text-sm text-gray-600">Pending</span>
+                </div>
+                <span className="text-sm font-medium">25%</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <div className="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
+                  <span className="text-sm text-gray-600">Completed</span>
+                </div>
+                <span className="text-sm font-medium">8%</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <div className="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
+                  <span className="text-sm text-gray-600">Cancelled</span>
+                </div>
+                <span className="text-sm font-medium">2%</span>
+              </div>
             </div>
           </div>
         </div>
