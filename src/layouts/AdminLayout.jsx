@@ -42,7 +42,7 @@ const AdminLayout = () => {
       <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}>
-        <div className="flex items-center justify-between h-16 px-6 border-b">
+        <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200">
           <h1 className="text-xl font-bold text-gray-800">Bệnh viện</h1>
           <button
             onClick={() => setSidebarOpen(false)}
@@ -60,7 +60,7 @@ const AdminLayout = () => {
             <h3 className="text-sm font-medium text-gray-700 mb-4">Quản lý</h3>
           </div>
           
-          <nav className="space-y-2">
+          <nav className="space-y-1">
             {menuItems.map((item, index) => {
               const isActive = location.pathname === `/admin/${item.path}` || 
                               (item.path === "" && location.pathname === "/admin");
@@ -70,11 +70,11 @@ const AdminLayout = () => {
                   onClick={() => navigate(item.path)}
                   className={`w-full flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors ${
                     isActive 
-                      ? "bg-blue-100 text-blue-900" 
-                      : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                      ? "bg-blue-50 text-blue-700 border-r-2 border-blue-700" 
+                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                   }`}
                 >
-                  <item.icon className="w-5 h-5 mr-3" />
+                  <item.icon className="w-4 h-4 mr-3" />
                   {item.label}
                 </button>
               );
@@ -86,7 +86,7 @@ const AdminLayout = () => {
       {/* Main content */}
       <div className="lg:pl-64">
         {/* Top bar */}
-        <div className="bg-white shadow-sm border-b">
+        <div className="bg-white shadow-sm border-b border-gray-200">
           <div className="flex items-center justify-between h-16 px-6">
             <button
               onClick={() => setSidebarOpen(true)}
