@@ -22,6 +22,7 @@ import PatientsPage from "@/pages/admin/PatientsPage";
 import AppointmentsPage from "@/pages/admin/AppointmentsPage";
 import WorkSchedulesPage from "@/pages/admin/WorkSchedulesPage";
 import UsersPage from "@/pages/admin/UsersPage";
+import TestPage from "@/pages/admin/TestPage";
 import { createBrowserRouter } from "react-router-dom";
 
 export const router = createBrowserRouter([
@@ -88,7 +89,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <DashboardPage />,
+        element: <TestPage />,
       },
       {
         path: "doctors",
