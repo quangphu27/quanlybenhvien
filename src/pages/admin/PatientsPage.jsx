@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Plus, Edit, Trash2, Eye } from "lucide-react";
 
 const PatientsPage = () => {
-  const [patients] = useState([
+  const [patients, setPatients] = useState([
     {
       id: "PAT001",
       name: "Nguyễn Văn A",
@@ -12,7 +12,8 @@ const PatientsPage = () => {
       age: 35,
       gender: "Nam",
       address: "Hà Nội",
-      status: "Hoạt động"
+      status: "Hoạt động",
+      registrationDate: "2025-01-05"
     },
     {
       id: "PAT002",
@@ -22,9 +23,61 @@ const PatientsPage = () => {
       age: 28,
       gender: "Nữ",
       address: "TP.HCM",
-      status: "Hoạt động"
+      status: "Hoạt động",
+      registrationDate: "2025-01-06"
+    },
+    {
+      id: "PAT003",
+      name: "Hoàng Văn E",
+      phone: "0369852147",
+      email: "hoangvane@email.com",
+      age: 42,
+      gender: "Nam",
+      address: "Đà Nẵng",
+      status: "Hoạt động",
+      registrationDate: "2025-01-07"
+    },
+    {
+      id: "PAT004",
+      name: "Đỗ Thị F",
+      phone: "0741258963",
+      email: "dothif@email.com",
+      age: 31,
+      gender: "Nữ",
+      address: "Cần Thơ",
+      status: "Tạm khóa",
+      registrationDate: "2025-01-08"
+    },
+    {
+      id: "PAT005",
+      name: "Phạm Văn G",
+      phone: "0912345678",
+      email: "phamvang@email.com",
+      age: 55,
+      gender: "Nam",
+      address: "Hải Phòng",
+      status: "Hoạt động",
+      registrationDate: "2025-01-09"
     }
   ]);
+
+  const handleAddPatient = () => {
+    console.log("Thêm bệnh nhân mới");
+  };
+
+  const handleEditPatient = (patient) => {
+    console.log("Sửa bệnh nhân:", patient);
+  };
+
+  const handleDeletePatient = (patientId) => {
+    if (window.confirm("Bạn có chắc chắn muốn xóa bệnh nhân này?")) {
+      setPatients(patients.filter(patient => patient.id !== patientId));
+    }
+  };
+
+  const handleViewPatient = (patient) => {
+    console.log("Xem chi tiết bệnh nhân:", patient);
+  };
 
   const getStatusBadge = (status) => {
     const baseClasses = "px-2 py-1 text-xs font-medium rounded-full";
@@ -41,7 +94,10 @@ const PatientsPage = () => {
           <h1 className="text-2xl font-bold text-gray-900">Quản lý Bệnh nhân</h1>
           <p className="text-gray-600 mt-1">Quản lý thông tin bệnh nhân</p>
         </div>
-        <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+        <Button 
+          onClick={handleAddPatient}
+          className="bg-blue-600 hover:bg-blue-700 text-white"
+        >
           <Plus className="w-4 h-4 mr-2" />
           Thêm bệnh nhân
         </Button>
@@ -112,10 +168,25 @@ const PatientsPage = () => {
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                    <button className="text-blue-600 hover:text-blue-900">
+                    <button
+                      onClick={() => handleViewPatient(patient)}
+                      className="text-green-600 hover:text-green-900"
+                      title="Xem chi tiết"
+                    >
+                      <Eye className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={() => handleEditPatient(patient)}
+                      className="text-blue-600 hover:text-blue-900"
+                      title="Sửa"
+                    >
                       <Edit className="w-4 h-4" />
                     </button>
-                    <button className="text-red-600 hover:text-red-900">
+                    <button
+                      onClick={() => handleDeletePatient(patient.id)}
+                      className="text-red-600 hover:text-red-900"
+                      title="Xóa"
+                    >
                       <Trash2 className="w-4 h-4" />
                     </button>
                   </td>

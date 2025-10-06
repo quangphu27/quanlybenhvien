@@ -16,7 +16,9 @@ const DoctorsPage = () => {
       phone: "0123456789",
       email: "tranthibich@hospital.com",
       experience: "10 năm",
-      status: "Hoạt động"
+      status: "Hoạt động",
+      licenseNumber: "BS001234",
+      department: "Khoa Tim mạch"
     },
     {
       id: "DOC002",
@@ -25,7 +27,9 @@ const DoctorsPage = () => {
       phone: "0987654321",
       email: "phamvandung@hospital.com",
       experience: "8 năm",
-      status: "Hoạt động"
+      status: "Hoạt động",
+      licenseNumber: "BS001235",
+      department: "Khoa Nội"
     },
     {
       id: "DOC003",
@@ -34,7 +38,9 @@ const DoctorsPage = () => {
       phone: "0369852147",
       email: "nguyenvangiang@hospital.com",
       experience: "12 năm",
-      status: "Nghỉ phép"
+      status: "Nghỉ phép",
+      licenseNumber: "BS001236",
+      department: "Khoa Ngoại"
     },
     {
       id: "DOC004",
@@ -43,7 +49,20 @@ const DoctorsPage = () => {
       phone: "0741258963", 
       email: "lethihua@hospital.com",
       experience: "6 năm",
-      status: "Hoạt động"
+      status: "Hoạt động",
+      licenseNumber: "BS001237",
+      department: "Khoa Sản"
+    },
+    {
+      id: "DOC005",
+      name: "BS. Võ Minh Tuấn",
+      specialty: "Nhi khoa",
+      phone: "0912345678",
+      email: "vominhtuan@hospital.com",
+      experience: "7 năm",
+      status: "Hoạt động",
+      licenseNumber: "BS001238",
+      department: "Khoa Nhi"
     }
   ]);
 
@@ -57,10 +76,14 @@ const DoctorsPage = () => {
     setIsModalOpen(true);
   };
 
-  const handleDeleteDoctor = (id) => {
+  const handleDeleteDoctor = (doctorId) => {
     if (window.confirm("Bạn có chắc chắn muốn xóa bác sĩ này?")) {
-      setDoctors(doctors.filter(doctor => doctor.id !== id));
+      setDoctors(doctors.filter(doctor => doctor.id !== doctorId));
     }
+  };
+
+  const handleViewDoctor = (doctor) => {
+    console.log("Xem chi tiết bác sĩ:", doctor);
   };
 
   const handleSaveDoctor = (doctorData) => {
